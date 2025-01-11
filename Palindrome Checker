@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Palindrome Checker</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1>Is it a Palindrome?</h1>
+        <div id="palindrome-container">
+            <label for="text-input">Enter in text to check for a palindrome:</label>
+            <input autocomplete="off" id="text-input">
+            <button id="check-btn">Check</button>
+            <div id="result"></div>
+        </div>
+        <div id="palindrome-definition">
+            <p>
+                <span>💡</span>
+                A <i>palindrome is</i> a word or sentence that's
+                spelled the same way both forward and backward,
+                ignoring punctuation, case, and spacing.
+            </p>
+        </div>
+        <script src="script.js"></script>
+    </body>
+</html>
+CSS
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+    --border-button-colors: #5a01a7;
+}
+
+body {
+    background-color: #0a0a23;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 60%;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid var(--border-button-colors);
+    border-left: none;
+    outline: none;
+    text-align: center;
+}
+
+button {
+    background-color: var(--border-button-colors);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    width: 90px;
+}
+
+#palindrome-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 6px #002ead;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+#result {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#palindrome-definition {
+    background-color: #00471b;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 500px) {
+    #palindrome-container {
+        width: 80%;
+        margin-left: 8.5%;
+        margin-right: auto;
+        margin-top: 30%;
+    }
+
+    #palindrome-definition {
+        width: 80%;
+        margin-right: 11.5%;
+    }
+}* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+:root {
+    --border-button-colors: #5a01a7;
+}
+
+body {
+    background-color: #0a0a23;
+}
+
+h1 {
+    text-align: center;
+    color: white;
+    margin-top: 40px;
+    margin-bottom: 40px;
+}
+
+label {
+    display: block;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 60%;
+    border-top: none;
+    border-right: none;
+    border-bottom: 2px solid var(--border-button-colors);
+    border-left: none;
+    outline: none;
+    text-align: center;
+}
+
+button {
+    background-color: var(--border-button-colors);
+    color: white;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 15px;
+    width: 90px;
+}
+
+#palindrome-container {
+    background-color: white;
+    padding: 20px;
+    border-radius: 20px;
+    box-shadow: 0 6px 6px #002ead;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 60px;
+    text-align: center;
+}
+
+#result {
+    margin-top: 20px;
+    margin-bottom: 15px;
+    font-size: 20px;
+}
+
+#palindrome-definition {
+    background-color: #00471b;
+    width: 35%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 20px;
+    padding: 20px;
+    color: white;
+    border-radius: 20px;
+    text-align: center;
+    font-size: 20px;
+}
+
+@media screen and (max-width: 500px) {
+    #palindrome-container {
+        width: 80%;
+        margin-left: 8.5%;
+        margin-right: auto;
+        margin-top: 30%;
+    }
+
+    #palindrome-definition {
+        width: 80%;
+        margin-right: 11.5%;
+    }
+}
+JS
+let textInput = document.getElementById("text-input");
+let checkBtn = document.getElementById("check-btn");
+let result = document.getElementById("result");
+
+let checkPalindrome = () => {
+  const regex = /[\W_]/gi;
+  let userInput = textInput.value.replace(regex, "").toLowerCase();
+  let userInputReverse = userInput.split("").reverse().join("").toLowerCase();
+
+  if (userInput === "") {
+    alert("Please input a value");
+    return null;
+  }
+
+  if (userInput === userInputReverse) {
+    result.innerHTML = `<b>${textInput.value}</b> is a palindrome`;
+  } else {
+    result.innerHTML = `<b>${textInput.value}</b> is not a palindrome`;
+  }
+  
+  // For debugging purposes
+  console.log(userInput);
+  console.log(userInputReverse);
+}
+
+checkBtn.addEventListener("click", checkPalindrome);
+textInput.addEventListener("keyup", e => e.key == "Enter" ? checkPalindrome() : null);
